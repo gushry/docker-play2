@@ -15,3 +15,4 @@ enablePlugins(DockerPlugin)
 
 maintainer in Docker := "gushry"
 dockerBaseImage in Docker := "gushry/play2"
+packageName in Docker := "gushry/docker-play2"
