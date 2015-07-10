@@ -27,7 +27,7 @@ test:
 deployment:
   hub:
     branch: master
-    commands
+    commands:
     - docker info
     - sbt docker:publishLocal
     - docker images
