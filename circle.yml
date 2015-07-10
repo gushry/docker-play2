@@ -18,7 +18,8 @@ dependencies:
     - which sbt
     - sbt sbt-version
     - docker info
-    - docker docker:publishLocal
+    - sbt docker:publishLocal
+    - docker images
 test:
   override:
     - chmod u+x ./activator
