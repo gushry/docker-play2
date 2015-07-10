@@ -20,5 +20,5 @@ dependencies:
 test:
   override:
     - "ls -ltr"
-    - "./activator clean test"
+    - "sh ./activator clean test"
 
