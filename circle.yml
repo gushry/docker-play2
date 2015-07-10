@@ -17,6 +17,8 @@ dependencies:
     - chmod u+x $HOME/bin/sbt
     - which sbt
     - sbt sbt-version
+    - docker info
+    - docker docker:publishLocal
 test:
   override:
     - chmod u+x ./activator
