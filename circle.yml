@@ -19,12 +19,17 @@ dependencies:
     - chmod u+x $HOME/bin/sbt
     - which sbt
     - sbt sbt-version
-    - docker info
-    - sbt docker:publishLocal
-    - docker images
 test:
   override:
     - chmod u+x ./activator
     - ls -ltr
     - ./activator clean test
-
+deployment:
+  hub:
+    branch: master
+    commands
+    - docker info
+    - sbt docker:publishLocal
+    - docker images
+    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+    - docker push gushry/docker-play2

@@ -12,3 +12,6 @@ libraryDependencies ++= Seq(
 playJavaSettings
 
 enablePlugins(DockerPlugin)
+
+maintainer in Docker := "gushry"
+dockerBaseImage in Docker := "gushry/play2"
