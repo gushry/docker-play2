@@ -19,5 +19,6 @@ dependencies:
     - sbt sbt-version
 test:
   override:
+    - "ls -ltr"
     - "./activator clean test"
 
