@@ -18,6 +18,11 @@ dependencies:
       > $HOME/bin/sbt
     - chmod u+x $HOME/bin/sbt
     - which sbt
+    - docker info
+    - sbt docker:publishLocal
+    - docker images
+    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+    - docker push gushry/docker-play2
     - sbt sbt-version
 test:
   override:
