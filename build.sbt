@@ -13,6 +13,8 @@ playJavaSettings
 
 enablePlugins(DockerPlugin)
 
-maintainer in Docker := "gushry"
-dockerBaseImage in Docker := "gushry/play2"
 packageName in Docker := "gushry/docker-play2"
+dockerBaseImage := "gushry/play2"
+maintainer := "gushry"
+
+dockerExposedPorts := Seq(9000)
