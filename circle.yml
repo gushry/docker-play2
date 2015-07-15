@@ -13,7 +13,7 @@ machine:
     SBT_VERSION: 0.13.8
     SBT_SCALA_VERSION: 2.10.4
     SBT_OPTS: "-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled"
-    BRANCH: $(git rev-parse --abbrev-ref HEAD | sed -e 's/\///' | sed -e 's/feature//')
+    BRANCH: git rev-parse --abbrev-ref HEAD | sed -e 's/\///' | sed -e 's/feature//'
 dependencies:
   pre:
     # get branch-name
@@ -21,6 +21,7 @@ dependencies:
     - export a=`git rev-parse --abbrev-ref HEAD | sed -e 's/\///' | sed -e 's/feature//'`
     - echo $a
     - echo $BRANCH
+    - echo $SBT_OPTS
     - wget --output-document=$HOME/bin/sbt-launch.jar
       https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/"$SBT_VERSION"/sbt-launch.jar
     - echo "java $SBT_OPTS -jar \`dirname \$0\`/sbt-launch.jar \"\$@\""
@@ -35,8 +36,10 @@ test:
     - ./activator clean test
 deployment:
   hub:
-    branch: master
     commands:
+    - export a=`git rev-parse --abbrev-ref HEAD | sed -e 's/\///' | sed -e 's/feature//'`
+    - echo $a
+    - echo $BRANCH
     - docker info
     - ./activator docker:clean docker:stage docker:publishLocal
     - docker images
