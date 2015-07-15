@@ -13,7 +13,7 @@ playJavaSettings
 
 enablePlugins(DockerPlugin)
 
-packageName in Docker := "docker-play2"
+packageName in Docker := "local/app"
 dockerBaseImage := "gushry/play2"
 maintainer := "gushry"
 
