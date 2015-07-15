@@ -32,9 +32,6 @@ dependencies:
 test:
   override:
     - chmod u+x ./activator
-    - ls -ltr
-    - ./activator clean test
-deployment:
   hub:
     branches: /feature/sample.*/
     commands:
