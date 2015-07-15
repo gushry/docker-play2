@@ -16,3 +16,7 @@ dist
 /RUNNING_PID
 /.settings
 /project/*-shim.sbt
+/.sbtserver
+.sbtserver
+.*.lock
+sbt-ui.sbt

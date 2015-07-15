@@ -1,10 +1,4 @@
-FROM gushry/play2
-MAINTAINER Gushiken
-
-COPY . /opt/myplay2
-
-WORKDIR /opt/myplay2
-RUN ./activator compile stage
+FROM gushry/docker-play2:1.0-SNAPSHOT
+MAINTAINER gushiken
 
 EXPOSE 9000
-ENTRYPOINT ["./target/universal/stage/bin/docker-play2"]
