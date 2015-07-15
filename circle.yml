@@ -36,6 +36,7 @@ test:
     - ./activator clean test
 deployment:
   hub:
+    branches: /feature/sample.*/
     commands:
     - export a=`git rev-parse --abbrev-ref HEAD | sed -e 's/\///' | sed -e 's/feature//'`
     - echo $a
