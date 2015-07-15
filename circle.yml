@@ -11,6 +11,12 @@ machine:
     SBT_OPTS: "-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled"
 dependencies:
   pre:
+    # get branch-name
+    - git rev-parse --abbrev-ref HEAD
+    - export a=`git rev-parse --abbrev-ref HEAD | sed -e 's/\///' | sed -e 's/feature//'`
+    - echo $a
+    - echo $BRANCH
+    - which play
     - wget --output-document=$HOME/bin/sbt-launch.jar
       https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/"$SBT_VERSION"/sbt-launch.jar
     - echo "java $SBT_OPTS -jar \`dirname \$0\`/sbt-launch.jar \"\$@\""
@@ -21,14 +27,12 @@ dependencies:
 test:
   override:
     - chmod u+x ./activator
-    - ls -ltr
     - ./activator clean test
 deployment:
   hub:
-    branch: master
+    branch: [master, develop, /feature/sample.*/]
     commands:
     - docker info
-    - ./activator docker:clean docker:stage docker:publishLocal
     - docker images
-    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-    - docker push gushry/docker-play2
+    - sh deploy.sh
+    - docker images
