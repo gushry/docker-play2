@@ -2,7 +2,6 @@ general:
   branches:
     only:
       - /feature/sample.*/
-      - git rev-parse --abbrev-ref HEAD
 machine:
   timezone:
     Asia/Tokyo
@@ -16,6 +15,7 @@ machine:
     SBT_OPTS: "-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled"
 dependencies:
   pre:
+    - git rev-parse --abbrev-ref HEAD
     - wget --output-document=$HOME/bin/sbt-launch.jar
       https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/"$SBT_VERSION"/sbt-launch.jar
     - echo "java $SBT_OPTS -jar \`dirname \$0\`/sbt-launch.jar \"\$@\""
