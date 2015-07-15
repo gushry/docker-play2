@@ -2,6 +2,7 @@ general:
   branches:
     only:
       - /feature/sample.*/
+      - git rev-parse --abbrev-ref HEAD
 machine:
   timezone:
     Asia/Tokyo
