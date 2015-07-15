@@ -35,7 +35,7 @@ test:
     - ./activator clean test
 deployment:
   hub:
-    branch: master
+    branch: /feature/sample.*/
     commands:
     - docker info
     - ./activator docker:clean docker:stage docker:publishLocal
