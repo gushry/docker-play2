@@ -18,8 +18,9 @@ dependencies:
   pre:
     # get branch-name
     - git rev-parse --abbrev-ref HEAD
-    - a=`git rev-parse --abbrev-ref HEAD | sed -e 's/\///' | sed -e 's/feature//'`
+    - export a=`git rev-parse --abbrev-ref HEAD | sed -e 's/\///' | sed -e 's/feature//'`
     - echo $a
+    - echo $BRANCH
     - wget --output-document=$HOME/bin/sbt-launch.jar
       https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/"$SBT_VERSION"/sbt-launch.jar
     - echo "java $SBT_OPTS -jar \`dirname \$0\`/sbt-launch.jar \"\$@\""
