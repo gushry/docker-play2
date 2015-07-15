@@ -37,9 +37,7 @@ deployment:
   hub:
     branch: /feature/sample.*/
     commands:
-    - A=`git rev-parse --abbrev-ref HEAD | sed -e 's/\///' | sed -e 's/feature//'`
-    - echo $A
-    - echo $BRANCH
+    - sh deploy.sh
     - docker info
     - ./activator docker:clean docker:stage docker:publishLocal
     - docker images
