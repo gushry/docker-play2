@@ -30,7 +30,7 @@ test:
     - ./activator clean test
 deployment:
   hub:
-#    branch: /feature/sample.*/
+    branch: [master, develop, /feature/sample.*/]
     commands:
     - docker info
     - docker images
