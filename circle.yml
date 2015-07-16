@@ -36,3 +36,6 @@ deployment:
     - docker images
     - sh deploy.sh
     - docker images
+    branch: develop
+    commands:
+    - curl -X POST https://circleci.com/api/v1/project/gushry/eb-deploy-dev/tree/master?circle-toke n=1f98947694495cdb8e25507f855612f58b621eb8
