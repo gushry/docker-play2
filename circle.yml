@@ -30,7 +30,7 @@ test:
     - ./activator clean test
 deployment:
   hub:
-    branch: [master, develop, /feature/sample.*/]
+    branch: [master, /feature/sample.*/]
     commands:
     - docker info
     - docker images
@@ -38,4 +38,4 @@ deployment:
     - docker images
     branch: develop
     commands:
-    - curl -X POST https://circleci.com/api/v1/project/gushry/eb-deploy-dev/tree/master?circle-toke n=1f98947694495cdb8e25507f855612f58b621eb8
+    - curl -X POST https://circleci.com/api/v1/project/gushry/eb-deploy-dev/tree/master?circle-token=1f98947694495cdb8e25507f855612f58b621eb8
