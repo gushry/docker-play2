@@ -30,11 +30,13 @@ deployment:
     - docker images
     - sh ./push-dockerhub.sh
     branch: develop
+  development:
     commands:
     - ./activator docker:clean docker:publishLocal
     - docker images
     - sh ./push-dockerhub.sh
     - sh ./notify-deployment.sh "gushry/eb-deploy-dev"
+  production:
     branch: master
     commands:
     - ./activator docker:clean docker:publishLocal
