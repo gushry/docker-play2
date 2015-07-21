@@ -29,8 +29,8 @@ deployment:
     - ./activator docker:clean docker:publishLocal
     - docker images
     - sh ./push-dockerhub.sh
-    branch: develop
   development:
+    branch: develop
     commands:
     - ./activator docker:clean docker:publishLocal
     - docker images
