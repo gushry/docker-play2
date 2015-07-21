@@ -14,7 +14,7 @@ playJavaSettings
 enablePlugins(DockerPlugin)
 
 packageName in Docker := "local/app"
-dockerBaseImage := "debian:jessie"
+dockerBaseImage := "gushry/deps"
 maintainer := "gushry"
 
 dockerExposedPorts := Seq(9000)
