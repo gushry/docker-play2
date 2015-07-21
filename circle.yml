@@ -11,12 +11,6 @@ machine:
     SBT_OPTS: "-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled"
 dependencies:
   pre:
-    # get branch-name
-    - git rev-parse --abbrev-ref HEAD
-    - export a=`git rev-parse --abbrev-ref HEAD | sed -e 's/\///' | sed -e 's/feature//'`
-    - echo $a
-    - echo $BRANCH
-    - which play
     - wget --output-document=$HOME/bin/sbt-launch.jar
       https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/"$SBT_VERSION"/sbt-launch.jar
     - echo "java $SBT_OPTS -jar \`dirname \$0\`/sbt-launch.jar \"\$@\""
@@ -32,12 +26,17 @@ deployment:
   hub:
     branch: /feature/sample.*
     commands:
-    - docker info
+    - ./activator docker:clean docker:publishLocal
     - docker images
-    - sh deploy.sh
-    - docker images
-    branch: [develop, master]
+    - sh ./push-dockerhub.sh
+    branch: develop
     commands:
-    - sh deploy.sh
+    - ./activator docker:clean docker:publishLocal
     - docker images
-    - curl -X POST https://circleci.com/api/v1/project/gushry/eb-deploy-dev/tree/master?circle-token=1f98947694495cdb8e25507f855612f58b621eb8
+    - sh ./push-dockerhub.sh
+    - sh ./notify-deployment.sh "gushry/eb-deploy-dev"
+    branch: master
+    commands:
+    - ./activator docker:clean docker:publishLocal
+    - docker images
+    - sh ./push-dockerhub.sh
