@@ -1,4 +1,4 @@
-machine:
+machin
   timezone:
     Asia/Tokyo
   java:
@@ -22,6 +22,8 @@ test:
   override:
     - chmod u+x ./activator
     - ./activator clean test
+    - chmod u+x ./build-push-dockerhub.sh
+    - chmod u+x ./notify-deployment.sh
 deployment:
   hub:
     branch: /feature/sample.*
