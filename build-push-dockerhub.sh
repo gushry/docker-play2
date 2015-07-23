@@ -5,6 +5,18 @@ set -ex
 BRANCH=`echo $CIRCLE_BRANCH | sed -e 's/^feature\///' | sed -e 's/\///'`
 IMAGE="local/app:1.0-SNAPSHOT"
 REPOSITORY="gushry/docker-play2"
+DOCKERFILE="target/docker/docker/stage/Dockerfile"
+
+./activator docker:clean docker:stage
+if [ ! -f $DOCKERFILE ];then
+  echo "Dockerfile generate failed."
+  exit 1
+fi
+cat $DOCKERFILE | sed -e 's/^ENTRYPOINT.*/ENTRYPOINT ["\/opt\/scripts\/newrelic.sh"]/' | sed -e 's/CMD.*/CMD ["bin\/docker-play2"]/'
+
+cd target/docker/docker/stage/
+
+docker build -t $IMAGE .
 
 docker tag $IMAGE $REPOSITORY:$BRANCH
 docker images
