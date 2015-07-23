@@ -12,7 +12,8 @@ if [ ! -f $DOCKERFILE ];then
   echo "Dockerfile generate failed."
   exit 1
 fi
-cat $DOCKERFILE | sed -e 's/^ENTRYPOINT.*/ENTRYPOINT ["\/opt\/scripts\/newrelic.sh"]/' | sed -e 's/CMD.*/CMD ["bin\/docker-play2"]/'
+cat $DOCKERFILE | sed -e 's/^ENTRYPOINT.*/ENTRYPOINT ["\/opt\/scripts\/newrelic.sh"]/' | sed -e 's/^CMD.*/CMD ["bin\/docker-play2"]/' | sed -e 's/^USER//' > /tmp/a
+mv /tmp/a $DOCKERFILE
 
 cd target/docker/docker/stage/
 
