@@ -17,6 +17,7 @@ cat $DOCKERFILE | sed -e 's/^ENTRYPOINT.*/ENTRYPOINT ["\/opt\/scripts\/newrelic.
 cd target/docker/docker/stage/
 
 docker build -t $IMAGE .
+docker images
 
 docker tag $IMAGE $REPOSITORY:$BRANCH
 docker images

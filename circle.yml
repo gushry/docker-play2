@@ -26,19 +26,13 @@ deployment:
   hub:
     branch: /feature/sample.*
     commands:
-    - ./activator docker:clean docker:publishLocal
-    - docker images
     - sh ./build-push-dockerhub.sh
   development:
     branch: develop
     commands:
-    - ./activator docker:clean docker:publishLocal
-    - docker images
     - sh ./build-push-dockerhub.sh
     - sh ./notify-deployment.sh "gushry/eb-deploy-dev"
   production:
     branch: master
     commands:
-    - ./activator docker:clean docker:publishLocal
-    - docker images
     - sh ./build-push-dockerhub.sh
