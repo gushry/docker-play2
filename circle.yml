@@ -11,12 +11,6 @@ machine:
     SBT_OPTS: "-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled"
 dependencies:
   pre:
-    # get branch-name
-    - git rev-parse --abbrev-ref HEAD
-    - export a=`git rev-parse --abbrev-ref HEAD | sed -e 's/\///' | sed -e 's/feature//'`
-    - echo $a
-    - echo $BRANCH
-    - which play
     - wget --output-document=$HOME/bin/sbt-launch.jar
       https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/"$SBT_VERSION"/sbt-launch.jar
     - echo "java $SBT_OPTS -jar \`dirname \$0\`/sbt-launch.jar \"\$@\""
@@ -30,9 +24,21 @@ test:
     - ./activator clean test
 deployment:
   hub:
-    branch: [master, develop, /feature/sample.*/]
+    branch: /feature/sample.*
     commands:
-    - docker info
+    - ./activator docker:clean docker:publishLocal
     - docker images
-    - sh deploy.sh
+    - sh ./push-dockerhub.sh
+  development:
+    branch: develop
+    commands:
+    - ./activator docker:clean docker:publishLocal
     - docker images
+    - sh ./push-dockerhub.sh
+    - sh ./notify-deployment.sh "gushry/eb-deploy-dev"
+  production:
+    branch: master
+    commands:
+    - ./activator docker:clean docker:publishLocal
+    - docker images
+    - sh ./push-dockerhub.sh
