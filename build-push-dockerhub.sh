@@ -14,9 +14,10 @@ if [ ! -f $DOCKERFILE ];then
 fi
 cat $DOCKERFILE | sed -e 's/^ENTRYPOINT.*/ENTRYPOINT ["\/opt\/scripts\/newrelic.sh"]/' | sed -e 's/^CMD.*/CMD ["bin\/docker-play2"]/' | sed -e 's/^USER//' > /tmp/a
 mv /tmp/a $DOCKERFILE
+cat $DOCKERFILE
 
 cd target/docker/docker/stage/
-
+pwd
 docker build -t $IMAGE .
 docker images
 
