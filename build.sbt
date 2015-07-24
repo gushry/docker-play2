@@ -14,7 +14,7 @@ playJavaSettings
 enablePlugins(DockerPlugin)
 
 packageName in Docker := "local/app"
-dockerBaseImage := "gushry/deps"
+dockerBaseImage := "gushry/runtime-java-with-newrelic"
 maintainer := "gushry"
 
 dockerExposedPorts := Seq(9000)
