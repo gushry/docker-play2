@@ -23,8 +23,8 @@ test:
     - chmod u+x ./activator
     - ./activator clean test
 deployment:
-  hub:
-    branch: /feature/sample.*
+  feature:
+    branch: [/feature\/sample.*/, /feature\/new.*/]
     commands:
     - sh ./build-push-dockerhub.sh
   development:
