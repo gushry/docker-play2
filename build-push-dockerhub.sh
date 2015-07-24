@@ -12,6 +12,7 @@ if [ ! -f $DOCKERFILE ];then
   echo "Dockerfile generate failed."
   exit 1
 fi
+cat $DOCKERFILE
 cat $DOCKERFILE | sed -e 's/^ENTRYPOINT.*/ENTRYPOINT ["\/opt\/scripts\/newrelic.sh"]/' | sed -e 's/^CMD.*/CMD ["bin\/docker-play2 -J-javaagent:$(pwd)/newrelic.jar"]/' | sed -e 's/^USER.*//' > /tmp/a
 mv /tmp/a $DOCKERFILE
 cat $DOCKERFILE
