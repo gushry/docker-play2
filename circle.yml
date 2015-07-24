@@ -24,7 +24,7 @@ test:
     - ./activator clean test
 deployment:
   hub:
-    branch: [/feature/sample.*,/feature/new.*]
+    branch: [feature/sample.*, feature/new.*]
     commands:
     - sh ./build-push-dockerhub.sh
   development:
