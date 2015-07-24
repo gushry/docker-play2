@@ -13,11 +13,15 @@ if [ ! -f $DOCKERFILE ];then
   exit 1
 fi
 cat $DOCKERFILE
-cat $DOCKERFILE | sed -e 's/^ENTRYPOINT.*/ENTRYPOINT ["\/opt\/scripts\/newrelic.sh"]/' | sed -e 's/^CMD.*/CMD ["bin\/docker-play2 -J-javaagent:.\/newrelic.jar"]/' | sed -e 's/^USER.*//' > /tmp/a
+cat $DOCKERFILE | \
+  sed -e 's/^ENTRYPOINT.*/ENTRYPOINT ["\/opt\/scripts\/newrelic.sh"]/' | \
+  sed -e 's/^CMD.*/CMD ["bin\/docker-play2 -J-javaagent:\/opt\/docker\/newrelic.jar"]/' | \
+  sed -e 's/^USER.*//' > /tmp/a
 mv /tmp/a $DOCKERFILE
 cat $DOCKERFILE
 
 cp newrelic.jar target/docker/docker/stage/opt/docker/
+cp newrelic.yml target/docker/docker/stage/opt/docker/
 
 cd target/docker/docker/stage/
 pwd
